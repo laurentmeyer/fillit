@@ -1,0 +1,61 @@
+lecture du fichier source
+- si le nombre d'arguments est different de 1, on affiche l'usage et on quitte
+- une fonction get_tetramino lit chaque tétramino et les pousse dans un pointeur vers tableau de tableaux "coords" de 27 pointeurs initialisés à NULL, recu comme paramètre de la fonction.
+	- on commence la lecture du premier tetra avec t = 0.
+	- on execute gnl. Si il retourne 1, récupère la ligne numéro i. Sinon, retourne ERR.
+	- si la longueur de la ligne  i est != 4, retourne ERR
+	- on boucle dans la ligne i. Si le caractère est . on avance. Si le caractère est #, on incrémente p. Si p > 4, on retourne ERR, sinon on pousse coords[t][p] = [i, j], et on avance. Sinon, on retourne ERR. Quand on arrive à \0, on incrémente i et on reboucle.
+	- après i = 4, si p < 4, on retourne ERR. Si gnl == 0, retourne valid_tetras(coords). Si -1 ou si 1 mais strcmp(ligne, "") != 0, retourne ERR. Sinon, continue.
+
+
+VALIDATION ET MISE A LA NORME DES TETRAMINOS
+
+
+DETERMINATION DU PLUS PETIT CARRE THEORIQUE
+- la fonction smallest_square prend en entrée le nombre de tetraminos
+- multiplie par 4 -> pts
+- augmente un int i jusqu'à ce que i * i >= pts
+- retourne i
+
+
+CREATION DU CARRE
+
+
+REMPLISSAGE DU CARRE
+- crée un carré du plus petit cote possible, rempli de points.
+
+- lance la fonction recursive:
+- copie l'input
+- trouve le prochain point et essaie de remplir avec le n-ieme tetra
+- si arrive a la fin du carré sans succès, libère la copie actuelle et déplace le tetra précédent
+- si le premier tetra ne peut pas être posé, on augmente la taille du carré
+- si le t-ieme tetra arrive a être placé, on retourne la copie et on libère toute la chaine si possible.
+
+
+AFFICHAGE DU CARRE
+
+================================================================
+
+création d'un tableau de t tétras
+symbolisé par un tableau pos de t * 2 cases : pos[0] contient la lettre, pos[1] la position actuelle du tetra. Il est initialisé à ABC... et 0,0,0,...
+une fonction vient remplacer les doublons. Si F est le même tetra que B, F devient aussi B.
+une fonction permet de vérifier si la disposition actuelle est possible dans la string donnée, de longueur side * side. Si elle l'est, on retourne la combinaison actuelle. Si elle ne l'est pas, on incrémente le dernier tetra possible.
+si le dernier tetra possible est au max, on incrémente le tétra précédent et on réinitialise les tétras suivants. Ca veut dire mettre à i + 1 s'il y a un tétra précédent identique en position i, et 0 sinon.
+si le premier tetra est au maximum et doit etre incrémenté, on incrémente side et réinitialise toutes les valeurs de pos à zéro.
+
+
+
+================================================================
+
+besoin de variables :
+- result (string)
+- tetras (tableau)
+- similar (tableau)
+- positions (tableau)
+- side (int)
+
+on remplit la string de .
+on trouve le premier emplacement ou on peut placer le premier tetra à partir de 0
+puis on place chaque tetra des qu'on peut, soit à partir de zero si il n'y a pas encore de similaire placé sur la string, soit juste apres le dernier similaire
+pour trouver le dernier similaire ...
+s'il n'y a pas d'emplacement dispo pour le tetra, et s'il ne s'agit pas de A, on avance le tetra précédent. S'il s'agissait de A, on augmente la taille de la string et on efface tout.
