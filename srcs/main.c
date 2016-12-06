@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 		ft_putstr("usage: fillit file\n");
 	else if ((l = get_all_tetras(av[1], &tetras)) == ERR
 			|| !(sq = new_square(smallest_square(l))))
-		ft_putstr("error");
+		ft_putstr("error\n");
 	else
 	{
 		find_same_tetras(tetras);
